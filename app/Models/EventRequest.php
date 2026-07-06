@@ -9,7 +9,7 @@ class EventRequest extends Model
     protected $fillable = [
         'form_no',
         'date_issued',
-        'signatures',
+
         'requester_name',
         'department',
         'contact',
@@ -26,6 +26,7 @@ class EventRequest extends Model
 
         'purpose',
 
+        // Section D
         'tables_qty',
         'chairs_qty',
         'projector_qty',
@@ -36,16 +37,25 @@ class EventRequest extends Model
         'total_cost',
 
         'logistics',
+        'signatures',
 
         'status',
         'remarks',
+         'ref_no',
     ];
 
     protected $casts = [
+        'department' => 'array',
+        'event_type' => 'array',
         'target_audience' => 'array',
+        'purpose' => 'array',
         'logistics' => 'array',
+        'signatures' => 'array',
+
+        'date_issued' => 'date',
         'request_date' => 'date',
-        'signatures'      => 'array',
         'proposed_date' => 'date',
+
+        'total_cost' => 'decimal:2',
     ];
 }

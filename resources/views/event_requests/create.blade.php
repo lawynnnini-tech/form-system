@@ -71,16 +71,17 @@
     }
     /* Section C Purpose Specifics */
 .purpose-table {
-        width: 100%;
+        width:100%;
         border-collapse: collapse;
         border: 3px solid #b3a9dd; /* အပြင်ဘောင် */
         background-color: #fff;
     }
 
     .purpose-table td {
-        height: 50px;              
+                     
         /* လိုင်းအရောင်ကို ပိုမိုဖျော့သော မီးခိုးရောင်ဖြင့် ပြောင်းလဲထားသည် */
         border-bottom: 1px solid #d3d3d3; 
+        height: 50px;
         padding: 0;
     }
 
@@ -171,11 +172,11 @@
             <tr><td class="label">Name of Requester / Organizer</td><td><input type="text" name="requester_name"></td></tr>
             <tr class="row-highlight"><td class="label">Department / Role</td><td>
                 <div class="check-group">
-                    <label><input type="checkbox" name="department" value="Teacher"> Teacher</label>
-                    <label><input type="checkbox" name="department" value="Marketing"> Marketing</label>
-                    <label><input type="checkbox" name="department" value="Admin"> Admin</label>
-                    <label><input type="checkbox" name="department" value="Student"> Student Org</label>
-                    <label><input type="checkbox" name="department" value="Other"> Other: <input type="text" style="width:100px;"></label>
+                    <label><input type="checkbox" name="department[]" value="Teacher"> Teacher</label>
+                    <label><input type="checkbox" name="department[]" value="Marketing"> Marketing</label>
+                    <label><input type="checkbox" name="department[]" value="Admin"> Admin</label>
+                    <label><input type="checkbox" name="department[]" value="Student"> Student Org</label>
+                    <label><input type="checkbox" name="department[]" value="Other"> Other: <input type="text" name="department_other" style="width:100px;"></label>
                 </div>
             </td></tr>
             <tr><td class="label">Contact Number / Email</td><td><input type="text" name="contact"></td></tr>
@@ -188,38 +189,61 @@
             <tr><td class="label">Event / Activity Title</td><td><input type="text" name="event_title"></td></tr>
             <tr class="row-highlight"><td class="label">Type of Event</td><td>
                 <div class="check-group">
-                    <label><input type="checkbox" name="event_type" value="Academic"> Academic</label>
-                    <label><input type="checkbox" name="event_type" value="Sports"> Sports</label>
-                    <label><input type="checkbox" name="event_type" value="Cultural"> Cultural</label>
-                    <label><input type="checkbox" name="event_type" value="Marketing"> Marketing/Promo</label>
-                    <label><input type="checkbox" name="event_type" value="Meeting"> Meeting</label>
-                    <label><input type="checkbox" name="event_type" value="Other"> Other: <input type="text" style="width:100px;"></label>
+                    <label><input type="checkbox" name="event_type[]" value="Academic"> Academic</label>
+                    <label><input type="checkbox" name="event_type[]" value="Sports"> Sports</label>
+                    <label><input type="checkbox" name="event_type[]" value="Cultural"> Cultural</label>
+                    <label><input type="checkbox" name="event_type[]" value="Marketing"> Marketing/Promo</label>
+                    <label><input type="checkbox" name="event_type[]" value="Meeting"> Meeting</label>
+                    <label><input type="checkbox" name="event_type[]" value="Other"> Other: <input type="text" name="event_type_other" style="width:100px;"></label>
                 </div>
             </td></tr>
-            <tr><td class="label">Proposed Date(s)</td><td><input type="text" name="proposed_date"></td></tr>
+            <tr><td class="label">Proposed Date(s)</td><td><input type="date" name="proposed_date"></td></tr>
             <tr class="row-highlight"><td class="label">Start | End Time</td><td>Start: <input type="time" name="start_time" style="width:100px;"> End: <input type="time" name="end_time" style="width:100px;"></td></tr>
             <tr><td class="label">Venue / Location</td><td><input type="text" name="venue"></td></tr>
             <tr class="row-highlight"><td class="label">Expected Participants</td><td><input type="number" name="participants"></td></tr>
             <tr><td class="label">Target Audience</td><td>
                 <div class="check-group">
-                    <label><input type="checkbox" name="audience[]" value="Students"> Students</label>
-                    <label><input type="checkbox" name="audience[]" value="Staff"> Staff</label>
-                    <label><input type="checkbox" name="audience[]" value="Parents"> Parents</label>
-                    <label><input type="checkbox" name="audience[]" value="Public"> Public</label>
-                    <label><input type="checkbox" name="audience[]" value="Other"> Other: <input type="text" style="width:100px;"></label>
+                    <label><input type="checkbox" name="target_audience[]" value="Students"> Students</label>
+                    <label><input type="checkbox" name="target_audience[]" value="Staff"> Staff</label>
+                    <label><input type="checkbox" name="target_audience[]" value="Parents"> Parents</label>
+                    <label><input type="checkbox" name="target_audience[]" value="Public"> Public</label>
+                    <label><input type="checkbox" name="target_audience[]" value="Other"> Other: <input type="text" name="audience_other" style="width:100px;"></label>
                 </div>
             </td></tr>
         </table>
         
-      <div class="section-title">SECTION C — PURPOSE / OBJECTIVES</div> <br>
-     
+     <div class="section-title">SECTION C — PURPOSE / OBJECTIVES</div><br>
+
 <table class="purpose-table">
-    <tr><td>&nbsp;</td></tr> <!-- လိုင်း ၁ -->
-    <tr><td>&nbsp;</td></tr> <!-- လိုင်း ၂ -->
-    <tr><td>&nbsp;</td></tr> <!-- လိုင်း ၃ -->
-    
-    <tr class="last-row"><td>&nbsp;</td></tr> <!-- လိုင်း ၄ -->
-    <tr ><td>&nbsp;</td></tr> <!-- လိုင်း ၅ (အဝါရောင်) -->
+    <tr>
+        <td>
+            <textarea name="purpose[]" style="width:100%; border:none; resize:none;">{{ old('purpose.0') }}</textarea>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <textarea name="purpose[]" style="width:100%; border:none; resize:none;">{{ old('purpose.1') }}</textarea>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <textarea name="purpose[]" style="width:100%; border:none; resize:none;">{{ old('purpose.2') }}</textarea>
+        </td>
+    </tr>
+
+    <tr class="last-row">
+        <td>
+            <textarea name="purpose[]" style="width:100%; border:none; resize:none;">{{ old('purpose.3') }}</textarea>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <textarea name="purpose[]" style="width:100%; border:none; resize:none;">{{ old('purpose.4') }}</textarea>
+        </td>
+    </tr>
 </table>
        <!-- Section D -->
         <div class="section-title">SECTION D — RESOURCES NEEDED</div><br>
@@ -271,7 +295,7 @@
     '3. Principal / Manager', 
     '4. Finance Officer (if budget required)', 
     '5. Admin Office'
-] as $role)
+] as $index => $role)
    <div style="display: flex; border: 1px solid #dbd8d8; margin-bottom: 10px;">
     <!-- ဘယ်ဘက်ခြမ်း Role Area -->
     <div style="width: 30%; background: #f8f1fc; padding: 12px; font-weight: bold; color: #1e134d; display: flex; align-items: center; border-right: 1px solid #dbd8d8;">
@@ -282,15 +306,15 @@
     <div style="width: 70%; padding: 10px; display: flex; flex-direction: column; gap: 8px; background: white; border-bottom: 2px solid #e4ce0c;">
         <div style="display: flex; align-items: center; height: 25px;">
             <span style="width: 90px; font-size: 14px;">Name (Print):</span>
-            <input type="text" style="border: none; border-bottom: 1px solid #000; flex: 1; height: 20px; font-size: 14px; background: transparent; outline: none;">
+            <input type="text" name="signatures[{{ $index }}][name]" style="border: none; border-bottom: 1px solid #000; flex: 1; height: 20px; font-size: 14px; background: transparent; outline: none;">
         </div>
         <div style="display: flex; align-items: center; height: 25px;">
             <span style="width: 90px; font-size: 14px;">Signature:</span>
-            <input type="text" style="border: none; border-bottom: 1px solid #000; flex: 1; height: 20px; font-size: 14px; background: transparent; outline: none;">
+            <input type="text" name="signatures[{{ $index }}][signature]" style="border: none; border-bottom: 1px solid #000; flex: 1; height: 20px; font-size: 14px; background: transparent; outline: none;">
         </div>
         <div style="display: flex; align-items: center; height: 25px;">
             <span style="width: 90px; font-size: 14px;">Date:</span>
-            <input type="text" style="border: none; border-bottom: 1px solid #000; flex: 1; height: 20px; font-size: 14px; background: transparent; outline: none;">
+            <input type="date" name="signatures[{{ $index }}][date]" style="border: none; border-bottom: 1px solid #000; flex: 1; height: 20px; font-size: 14px; background: transparent; outline: none;">
         </div>
     </div>
 </div>
@@ -303,8 +327,17 @@
 <div style="border: 2px solid #4B0082; padding: 15px; background: #fff;">
     <!-- Approved / Disapproved Section -->
     <div style="margin-bottom: 15px; display: flex; gap: 20px;">
-        <label><input type="checkbox" name="status" value="approved"> Approved</label>
-        <label><input type="checkbox" name="status" value="disapproved"> Disapproved</label>
+        <label>
+        <input type="radio" name="status" value="Approved"
+            {{ old('status') == 'Approved' ? 'checked' : '' }}>
+        Approved
+    </label>
+
+    <label>
+        <input type="radio" name="status" value="Rejected"
+            {{ old('status') == 'Rejected' ? 'checked' : '' }}>
+        Rejected
+    </label>
     </div>
     
     <!-- Reference No. Section -->

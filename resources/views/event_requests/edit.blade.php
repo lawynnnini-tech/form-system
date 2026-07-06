@@ -3,6 +3,7 @@
 @section('title', 'Event Activity Request Form')
 
 @section('content')
+
 <style>
     /* အခြေခံအချက်အလက်များ */
     body { background: #f3f4f6; font-family: Arial, sans-serif; padding: 20px; }
@@ -71,16 +72,17 @@
     }
     /* Section C Purpose Specifics */
 .purpose-table {
-        width: 100%;
+        width:100%;
         border-collapse: collapse;
         border: 3px solid #b3a9dd; /* အပြင်ဘောင် */
         background-color: #fff;
     }
 
     .purpose-table td {
-        height: 50px;              
+                     
         /* လိုင်းအရောင်ကို ပိုမိုဖျော့သော မီးခိုးရောင်ဖြင့် ပြောင်းလဲထားသည် */
         border-bottom: 1px solid #d3d3d3; 
+        height: 50px;
         padding: 0;
     }
 
@@ -146,13 +148,11 @@
     <div class="form-meta" style="display: flex; gap: 20px; align-items: center;">
         <div>
             <label style="font-weight: bold; margin-right: 5px;">Form No:</label>
-            <!-- form_no အတွက် value ထည့်ခြင်း -->
             <input type="text" name="form_no" value="{{ old('form_no', $eventRequest->form_no) }}" style="width: 100px; padding: 5px;">
         </div>
         <div>
             <label style="font-weight: bold; margin-right: 5px;">Date:</label>
-            <!-- date_issued အတွက် value ထည့်ခြင်း -->
-            <input type="date" name="date_issued" value="{{ old('date_issued', $eventRequest->date_issued) }}" style="width: 150px; padding: 5px;">
+            <input type="date" name="date_issued" value="{{ old('date_issued', optional($eventRequest->date_issued)->format('Y-m-d')) }}" style="width: 150px; padding: 5px;">
         </div>
     </div>
 </div>
@@ -168,79 +168,85 @@
     <div class="gold-line"></div>
 </div>
 
-       <!-- Section A -->
-<div class="section-title">SECTION A — REQUESTER INFORMATION</div><br>
-<table>
-    <tr>
-        <td class="label">Name of Requester / Organizer</td>
-        <td><input type="text" name="requester_name" value="{{ old('requester_name', $eventRequest->requester_name) }}"></td>
-    </tr>
-    <tr class="row-highlight">
-        <td class="label">Department / Role</td>
-        <td>
-            <div class="check-group">
-              <label><input type="checkbox" name="department[]" value="Teacher" {{ in_array('Teacher', old('department', (array)($eventRequest->department ?? []))) ? 'checked' : '' }}> Teacher</label>
-<label><input type="checkbox" name="department[]" value="Marketing" {{ in_array('Marketing', old('department', (array)($eventRequest->department ?? []))) ? 'checked' : '' }}> Marketing</label>
-<label><input type="checkbox" name="department[]" value="Admin" {{ in_array('Admin', old('department', (array)($eventRequest->department ?? []))) ? 'checked' : '' }}> Admin</label>
-<label><input type="checkbox" name="department[]" value="Student" {{ in_array('Student', old('department', (array)($eventRequest->department ?? []))) ? 'checked' : '' }}> Student Org</label>
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td class="label">Contact Number / Email</td>
-        <td><input type="text" name="contact" value="{{ old('contact', $eventRequest->contact) }}"></td>
-    </tr>
-    <tr class="row-highlight">
-        <td class="label">Date of Request</td>
-        <td><input type="date" name="request_date" value="{{ old('request_date', $eventRequest->request_date) }}"></td>
-    </tr>
-</table>
+        <!-- Section A -->
+        <div class="section-title">SECTION A — REQUESTER INFORMATION</div><br>
+        <table>
+            <tr><td class="label">Name of Requester / Organizer</td><td><input type="text" name="requester_name" value="{{ old('requester_name', $eventRequest->requester_name) }}"></td></tr>
+            <tr class="row-highlight"><td class="label">Department / Role</td><td>
+                <div class="check-group">
+                    <label><input type="checkbox" name="department[]" value="Teacher"
+       {{ in_array('Teacher', old('department', $eventRequest->department ?? [])) ? 'checked' : '' }}> Teacher</label>
+                    <label><input type="checkbox" name="department[]" value="Marketing"
+                    {{ in_array('Marketing', old('department', $eventRequest->department ?? [])) ? 'checked' : '' }}> Marketing</label>
+                    <label><input type="checkbox" name="department[]" value="Admin"
+                    {{ in_array('Admin', old('department', $eventRequest->department ?? [])) ? 'checked' : '' }}> Admin</label>
+                    <label><input type="checkbox" name="department[]" value="Student"
+                    {{ in_array('Student', old('department', $eventRequest->department ?? [])) ? 'checked' : '' }}> Student Org</label>
+                    <label><input type="checkbox" name="department[]" value="Other"> Other: <input type="text"  style="width:100px;"></label>
+                </div>
+            </td></tr>
+            <tr><td class="label">Contact Number / Email</td><td><input type="text" name="contact" value="{{ old('contact', $eventRequest->contact) }}"></td></tr>
+            <tr class="row-highlight"><td class="label">Date of Request</td><td><input type="date"
+       name="request_date"
+       value="{{ old('request_date', optional($eventRequest->request_date)->format('Y-m-d')) }}"></td></tr>
+        </table>
 
         <!-- Section B -->
-<div class="section-title">SECTION B — EVENT DETAILS</div><br>
-<table>
-    <tr><td class="label">Event / Activity Title</td><td><input type="text" name="event_title" value="{{ old('event_title', $eventRequest->event_title) }}"></td></tr>
-    
-    <tr class="row-highlight"><td class="label">Type of Event</td><td>
-        <div class="check-group">
-            <label><input type="checkbox" name="event_type[]" value="Academic" {{ in_array('Academic', old('event_type', (array)($eventRequest->event_type ?? []))) ? 'checked' : '' }}> Academic</label>
-<label><input type="checkbox" name="event_type[]" value="Sports" {{ in_array('event_type', old('event_type', (array)($eventRequest->event_type ?? []))) ? 'checked' : '' }}> Sports</label>
-<label><input type="checkbox" name="event_type[]" value="Cultural" {{ in_array('event_type', old('event_type', (array)($eventRequest->event_type ?? []))) ? 'checked' : '' }}> Cultural</label>
-<label><input type="checkbox" name="event_type[]" value="Meeting" {{ in_array('Meeting', old('event_type', (array)($eventRequest->event_type ?? []))) ? 'checked' : '' }}> Meeting</label>
-        </div>
-    </td></tr>
-    
-    <tr><td class="label">Proposed Date(s)</td><td><input type="text" name="proposed_date" value="{{ old('proposed_date', $eventRequest->proposed_date) }}"></td></tr>
-    
-    <tr class="row-highlight"><td class="label">Start | End Time</td>
-        <td>
-            Start: <input type="time" name="start_time" value="{{ old('start_time', $eventRequest->start_time) }}" style="width:100px;"> 
-            End: <input type="time" name="end_time" value="{{ old('end_time', $eventRequest->end_time) }}" style="width:100px;">
-        </td>
-    </tr>
-    
-    <tr><td class="label">Venue / Location</td><td><input type="text" name="venue" value="{{ old('venue', $eventRequest->venue) }}"></td></tr>
-    
-    <tr class="row-highlight"><td class="label">Expected Participants</td><td><input type="number" name="participants" value="{{ old('participants', $eventRequest->participants) }}"></td></tr>
-    
-    <tr><td class="label">Target Audience</td><td>
-        <div class="check-group">
-            <label><input type="checkbox" name="audience[]" value="Students" {{ in_array('Students', old('audience', (array)($eventRequest->target_audience ?? []))) ? 'checked' : '' }}> Students</label>
-<label><input type="checkbox" name="audience[]" value="Staff" {{ in_array('Staff', old('audience', (array)($eventRequest->target_audience ?? []))) ? 'checked' : '' }}> Staff</label>
-<label><input type="checkbox" name="audience[]" value="Parents" {{ in_array('Parents', old('audience', (array)($eventRequest->target_audience ?? []))) ? 'checked' : '' }}> Parents</label>
-<label><input type="checkbox" name="audience[]" value="Public" {{ in_array('Public', old('audience', (array)($eventRequest->target_audience ?? []))) ? 'checked' : '' }}> Public</label>
-        </div>
-    </td></tr>
-</table>
+        <div class="section-title">SECTION B — EVENT DETAILS</div><br>
+        <table>
+            <tr><td class="label">Event / Activity Title</td><td><input type="text" name="event_title" value="{{ old('event_title', $eventRequest->event_title) }}"></td></tr>
+            <tr class="row-highlight"><td class="label">Type of Event</td><td>
+                <div class="check-group">
+                    <label><input type="checkbox" name="event_type[]" value="Academic"
+                    {{ in_array('Academic', old('event_type', $eventRequest->event_type ?? [])) ? 'checked' : '' }}> Academic</label>
+                    <label><input type="checkbox" name="event_type[]" value="Sports"
+                    {{ in_array('Sports', old('event_type', $eventRequest->event_type ?? [])) ? 'checked' : '' }}> Sports</label>
+                    <label><input type="checkbox" name="event_type[]" value="Cultural"
+                    {{ in_array('Cultural', old('event_type', $eventRequest->event_type ?? [])) ? 'checked' : '' }}> Cultural</label>
+                    <label><input type="checkbox" name="event_type[]" value="Marketing"
+                    {{ in_array('Marketing', old('event_type', $eventRequest->event_type ?? [])) ? 'checked' : '' }}> Marketing/Promo</label>
+                    <label><input type="checkbox" name="event_type[]" value="Meeting"
+                    {{ in_array('Meeting', old('event_type', $eventRequest->event_type ?? [])) ? 'checked' : '' }}> Meeting</label>
+                    <label><input type="checkbox" name="event_type[]" value="Other"> Other: <input type="text"  style="width:100px;"></label>
+                </div>
+            </td></tr>
+            <tr><td class="label">Proposed Date(s)</td><td><input type="date"
+       name="proposed_date"
+       value="{{ old('proposed_date', optional($eventRequest->proposed_date)->format('Y-m-d')) }}"></td></tr>
+            <tr class="row-highlight"><td class="label">Start | End Time</td><td>Start: <input type="time" name="start_time" value="{{ old('start_time', $eventRequest->start_time) }}"
+             style="width:100px;"> End: <input type="time" name="end_time"  value="{{ old('end_time', $eventRequest->end_time) }}"style="width:100px;"></td></tr>
+            <tr><td class="label">Venue / Location</td><td><input type="text" name="venue" value="{{ old('venue', $eventRequest->venue) }}"></td></tr>
+            <tr class="row-highlight"><td class="label">Expected Participants</td><td><input type="number" name="participants" value="{{ old('participants', $eventRequest->participants) }}"></td></tr>
+            <tr><td class="label">Target Audience</td><td>
+                <div class="check-group">
+                    <label><input type="checkbox" name="target_audience[]" value="Students"
+                    {{ in_array('Students', old('target_audience', $eventRequest->target_audience ?? [])) ? 'checked' : '' }}> Students</label>
+                    <label><input type="checkbox" name="target_audience[]" value="Staff"
+                    {{ in_array('Staff', old('target_audience', $eventRequest->target_audience ?? [])) ? 'checked' : '' }}> Staff</label>
+                    <label><input type="checkbox" name="target_audience[]" value="Parents"
+                    {{ in_array('Parents', old('target_audience', $eventRequest->target_audience ?? [])) ? 'checked' : '' }}> Parents</label>
+                    <label><input type="checkbox" name="target_audience[]" value="Public"
+                    {{ in_array('Public', old('target_audience', $eventRequest->target_audience ?? [])) ? 'checked' : '' }}> Public</label>
+                    <label><input type="checkbox" name="target_audience[]" value="Other"> Other: <input type="text" name="audience_other" style="width:100px;"></label>
+                </div>
+            </td></tr>
+        </table>
         
-      <div class="section-title">SECTION C — PURPOSE / OBJECTIVES</div> <br>
+    <div class="section-title">SECTION C — PURPOSE / OBJECTIVES</div><br>
+
+@php
+    $purpose = old('purpose', $eventRequest->purpose ?? []);
+@endphp
+
 <table class="purpose-table">
-    <tr><td><textarea name="purpose_1" style="width:100%; border:none; height:100%;">{{ old('purpose_1', $eventRequest->purpose_1 ?? '') }}</textarea></td></tr>
-    <tr><td><textarea name="purpose_2" style="width:100%; border:none; height:100%;">{{ old('purpose_2', $eventRequest->purpose_2 ?? '') }}</textarea></td></tr>
-    <tr><td><textarea name="purpose_3" style="width:100%; border:none; height:100%;">{{ old('purpose_3', $eventRequest->purpose_3 ?? '') }}</textarea></td></tr>
-    
-    <tr class="last-row"><td><textarea name="purpose_4" style="width:100%; border:none; height:100%;">{{ old('purpose_4', $eventRequest->purpose_4 ?? '') }}</textarea></td></tr>
-    <tr><td><textarea name="purpose_5" style="width:100%; border:none; height:100%;">{{ old('purpose_5', $eventRequest->purpose_5 ?? '') }}</textarea></td></tr>
+    @for ($i = 0; $i < 5; $i++)
+        <tr class="{{ $i == 3 ? 'last-row' : '' }}">
+            <td>
+                <textarea name="purpose[]"
+                          style="width:100%; border:none; height:100%; resize:none;">{{ $purpose[$i] ?? '' }}</textarea>
+            </td>
+        </tr>
+    @endfor
 </table>
        <!-- Section D -->
         <div class="section-title">SECTION D — RESOURCES NEEDED</div><br>
@@ -265,106 +271,126 @@
     </tbody>
 </table>
 
-       <!-- Section E -->
-<div class="section-title">SECTION E — LOGISTICS & SUPPORT REQUIRED</div> <br>
-<div style="padding:15px; border:0px solid #ccc; display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
-    <!-- Checkbox တိုင်းတွင် in_array ကို သုံးပြီး checked ဖြစ်မဖြစ် စစ်ဆေးပါ -->
-    <label><input type="checkbox" name="logistics[]" value="sound" {{ in_array('sound', old('logistics', $eventRequest->logistics ?? [])) ? 'checked' : '' }}> Sound system / microphones</label>
-    <label><input type="checkbox" name="logistics[]" value="decor" {{ in_array('decor', old('logistics', $eventRequest->logistics ?? [])) ? 'checked' : '' }}> Decorations</label>
-    <label><input type="checkbox" name="logistics[]" value="tables" {{ in_array('tables', old('logistics', $eventRequest->logistics ?? [])) ? 'checked' : '' }}> Tables & chairs</label>
-    <label><input type="checkbox" name="logistics[]" value="refresh" {{ in_array('refresh', old('logistics', $eventRequest->logistics ?? [])) ? 'checked' : '' }}> Refreshments / catering</label>
-    <label><input type="checkbox" name="logistics[]" value="projector" {{ in_array('projector', old('logistics', $eventRequest->logistics ?? [])) ? 'checked' : '' }}> Projector / screen</label>
-    <label><input type="checkbox" name="logistics[]" value="security" {{ in_array('security', old('logistics', $eventRequest->logistics ?? [])) ? 'checked' : '' }}> Security / first aid</label>
-    <label><input type="checkbox" name="logistics[]" value="marketing" {{ in_array('marketing', old('logistics', $eventRequest->logistics ?? [])) ? 'checked' : '' }}> Marketing materials (posters)</label>
-    <label>
-        <input type="checkbox" name="logistics[]" value="other" {{ in_array('other', old('logistics', $eventRequest->logistics ?? [])) ? 'checked' : '' }}> Other: 
-        <input type="text" name="logistics_other" value="{{ old('logistics_other', $eventRequest->logistics_other ?? '') }}" style="width:150px;">
-    </label>
-</div>
+        <!-- Section E -->
+        <div class="section-title">SECTION E — LOGISTICS & SUPPORT REQUIRED</div> <br>
+        <div style="padding:15px; border:0px solid #ccc; display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+            <label><input type="checkbox" name="logistics[]" value="sound"
+            {{ in_array('sound', old('logistics', $eventRequest->logistics ?? [])) ? 'checked' : '' }}> Sound system / microphones</label>
+            <label><input type="checkbox" name="logistics[]" value="decor"
+            {{ in_array('decor', old('logistics', $eventRequest->logistics ?? [])) ? 'checked' : '' }}> Decorations</label>
+            <label><input type="checkbox" name="logistics[]" value="tables"
+            {{ in_array('tables', old('logistics', $eventRequest->logistics ?? [])) ? 'checked' : '' }}> Tables & chairs</label>
+            <label><input type="checkbox" name="logistics[]" value="refresh"
+            {{ in_array('refresh', old('logistics', $eventRequest->logistics ?? [])) ? 'checked' : '' }}> Refreshments / catering</label>
+            <label><input type="checkbox" name="logistics[]" value="projector"
+            {{ in_array('projector', old('logistics', $eventRequest->logistics ?? [])) ? 'checked' : '' }}> Projector / screen</label>
+            <label><input type="checkbox" name="logistics[]" value="security"
+            {{ in_array('security', old('logistics', $eventRequest->logistics ?? [])) ? 'checked' : '' }}> Security / first aid</label>
+            <label><input type="checkbox" name="logistics[]" value="marketing"
+            {{ in_array('marketing', old('logistics', $eventRequest->logistics ?? [])) ? 'checked' : '' }}> Marketing materials (posters)</label>
+            <label><input type="checkbox" name="logistics[]" value="other"> Other: <input type="text" style="width:150px;"></label>
+        </div>
 
-       <!-- Section F: SIGNATURES & APPROVAL -->
+        <!-- Section F: SIGNATURES & APPROVAL -->
 <div class="section-title">SECTION F — SIGNATURES & APPROVAL</div><br>
 
+<!-- Note Section -->
+<div style="padding: 10px; font-style: italic; border-left: 4px solid #e4ce0c; background: #f9f9f9; margin-bottom: 15px;">
+    Note: This event/activity may only proceed after all required approvals are signed.
+</div>
+@php
+    $signatures = old('signatures', $eventRequest->signatures ?? []);
+@endphp
+
 @foreach([
-    'requester' => '1. Requester / Organizer', 
-    'dept_head' => '2. Department Head / Supervisor', 
-    'principal' => '3. Principal / Manager', 
-    'finance' => '4. Finance Officer (if budget required)', 
-    'admin' => '5. Admin Office'
-] as $key => $role)
+    '1. Requester / Organizer', 
+    '2. Department Head / Supervisor', 
+    '3. Principal / Manager', 
+    '4. Finance Officer (if budget required)', 
+    '5. Admin Office'
+] as $index => $role)
    <div style="display: flex; border: 1px solid #dbd8d8; margin-bottom: 10px;">
-    <!-- Role Area -->
-    <div style="width: 30%; background: #f8f1fc; padding: 12px; font-weight: bold; color: #1e134d; border-right: 1px solid #dbd8d8;">
+    <!-- ဘယ်ဘက်ခြမ်း Role Area -->
+    <div style="width: 30%; background: #f8f1fc; padding: 12px; font-weight: bold; color: #1e134d; display: flex; align-items: center; border-right: 1px solid #dbd8d8;">
         {{ $role }}
     </div>
     
-    <!-- Inputs -->
+    <!-- ညာဘက်ခြမ်း Inputs (အနေတော် Padding နှင့် Height) -->
     <div style="width: 70%; padding: 10px; display: flex; flex-direction: column; gap: 8px; background: white; border-bottom: 2px solid #e4ce0c;">
         <div style="display: flex; align-items: center; height: 25px;">
             <span style="width: 90px; font-size: 14px;">Name (Print):</span>
-            <input type="text" name="signatures[{{$key}}][name]" 
-                   value="{{ old('signatures.'.$key.'.name', $eventRequest->signatures[$key]['name'] ?? '') }}" 
-                   style="border: none; border-bottom: 1px solid #000; flex: 1;">
+            <input type="text" name="signatures[{{ $index }}][name]" value="{{ $signatures[$index]['name'] ?? '' }}"
+            style="border: none; border-bottom: 1px solid #000; flex: 1; height: 20px; font-size: 14px; background: transparent; outline: none;">
         </div>
         <div style="display: flex; align-items: center; height: 25px;">
             <span style="width: 90px; font-size: 14px;">Signature:</span>
-            <input type="text" name="signatures[{{$key}}][sig]" 
-                   value="{{ old('signatures.'.$key.'.sig', $eventRequest->signatures[$key]['sig'] ?? '') }}" 
-                   style="border: none; border-bottom: 1px solid #000; flex: 1;">
+            <input type="text" name="signatures[{{ $index }}][signature]" value="{{ $signatures[$index]['signature'] ?? '' }}"
+            style="border: none; border-bottom: 1px solid #000; flex: 1; height: 20px; font-size: 14px; background: transparent; outline: none;">
         </div>
         <div style="display: flex; align-items: center; height: 25px;">
             <span style="width: 90px; font-size: 14px;">Date:</span>
-            <input type="date" name="signatures[{{$key}}][date]" 
-                   value="{{ old('signatures.'.$key.'.date', $eventRequest->signatures[$key]['date'] ?? '') }}" 
-                   style="border: none; border-bottom: 1px solid #000; flex: 1;">
+            <input type="date" name="signatures[{{ $index }}][date]"value="{{ $signatures[$index]['date'] ?? '' }}"
+            style="border: none; border-bottom: 1px solid #000; flex: 1; height: 20px; font-size: 14px; background: transparent; outline: none;">
         </div>
     </div>
 </div>
 @endforeach
-       <!-- FOR OFFICE USE ONLY -->
+
+        <!-- FOR OFFICE USE ONLY -->
 <div style="background: #d8a51a; color: white; padding: 10px; font-weight: bold; margin-top: 10px;">
     FOR OFFICE USE ONLY
 </div>
 <div style="border: 2px solid #4B0082; padding: 15px; background: #fff;">
-    <!-- Approved / Disapproved Section (Radio Button သို့မဟုတ် Checkbox အဖြစ် အသုံးပြုနိုင်သည်) -->
+    <!-- Approved / Disapproved Section -->
     <div style="margin-bottom: 15px; display: flex; gap: 20px;">
         <label>
-            <input type="radio" name="status" value="approved" {{ old('status', $eventRequest->status) == 'approved' ? 'checked' : '' }}> Approved
-        </label>
-        <label>
-            <input type="radio" name="status" value="disapproved" {{ old('status', $eventRequest->status) == 'disapproved' ? 'checked' : '' }}> Disapproved
-        </label>
+        <input type="radio"
+       name="status"
+       value="Approved"
+       {{ old('status', $eventRequest->status) == 'Approved' ? 'checked' : '' }}>
+        Approved
+    </label>
+
+    <label>
+        <input type="radio"
+       name="status"
+       value="Rejected"
+       {{ old('status', $eventRequest->status) == 'Rejected' ? 'checked' : '' }}>
+        Rejected
+    </label>
     </div>
     
     <!-- Reference No. Section -->
     <div style="margin-bottom: 15px; display: flex; align-items: center;">
         <span style="margin-right: 10px; font-weight: bold;">Reference No.:</span>
-        <input type="text" name="ref_no" value="{{ old('ref_no', $eventRequest->ref_no) }}" style="border: none; border-bottom: 1px solid #000; flex: 1;">
+        <input type="text" name="ref_no"  value="{{ old('ref_no', $eventRequest->ref_no) }}"style="border: none; border-bottom: 1px solid #000; flex: 1;">
     </div>
     
     <!-- Remarks Section -->
     <div style="display: flex; align-items: center;">
         <span style="margin-right: 10px; font-weight: bold;">Remarks:</span>
-        <input type="text" name="remarks" value="{{ old('remarks', $eventRequest->remarks) }}" style="border: none; border-bottom: 1px solid #000; flex: 1;">
+       <input type="text"
+       name="remarks"
+       value="{{ old('remarks', $eventRequest->remarks) }}">
     </div>
 </div>
 
-<!-- Submit Button -->
-<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
     
     <!-- Cancel Button (ဘယ်ဘက်) -->
-    <!-- အကယ်၍ 'event-requests.index' ကို ပြန်သွားလိုပါက အောက်ပါအတိုင်းရေးပါ -->
     <a href="{{ route('event-requests.index') }}" 
-       style="padding: 10px 40px; background-color: #f3f4f6; color: #374151; text-decoration: none; border-radius: 4px; font-weight: bold; cursor: pointer; border: 1px solid #d1d5db;">
+       style="padding: 10px 40px; background-color: #e5e7eb; color: #374151; text-decoration: none; border-radius: 4px; font-weight: bold; cursor: pointer;">
        CANCEL
     </a>
 
     <!-- Submit Button (ညာဘက်) -->
     <button type="submit" 
             style="padding: 10px 40px; background-color: #4B0082; color: white; border: none; border-radius: 4px; font-weight: bold; cursor: pointer;">
-            UPDATE
+            Update
     </button>
     
+</div>
+    </form>
 </div>
 
 @if ($errors->any())
