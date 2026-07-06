@@ -147,4 +147,6 @@ $validated['proposed_date'] = $request->proposed_date;
 
         return back()->with('success', 'Deleted Successfully');
     }
+
+    
 }

@@ -11,4 +11,5 @@ class DashboardController extends Controller
         // ဒီနေရာမှာ dashboard.blade.php ကို ပြပေးမယ်
         return view('dashboard'); 
     }
+    
 }
