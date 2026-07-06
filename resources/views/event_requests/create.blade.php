@@ -320,7 +320,21 @@
     </div>
 </div>
 
-        <button type="submit" style="margin-top:20px; background:#4B0082; color:white; padding:10px 40px; cursor:pointer;">SUBMIT</button>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+    
+    <!-- Cancel Button (ဘယ်ဘက်) -->
+    <a href="{{ route('event-requests.index') }}" 
+       style="padding: 10px 40px; background-color: #e5e7eb; color: #374151; text-decoration: none; border-radius: 4px; font-weight: bold; cursor: pointer;">
+       CANCEL
+    </a>
+
+    <!-- Submit Button (ညာဘက်) -->
+    <button type="submit" 
+            style="padding: 10px 40px; background-color: #4B0082; color: white; border: none; border-radius: 4px; font-weight: bold; cursor: pointer;">
+            SUBMIT
+    </button>
+    
+</div>
     </form>
 </div>
 

@@ -350,7 +350,22 @@
 </div>
 
 <!-- Submit Button -->
-<button type="submit" style="margin-top:20px; background:#4B0082; color:white; padding:10px 40px; cursor:pointer;">UPDATE</button>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+    
+    <!-- Cancel Button (ဘယ်ဘက်) -->
+    <!-- အကယ်၍ 'event-requests.index' ကို ပြန်သွားလိုပါက အောက်ပါအတိုင်းရေးပါ -->
+    <a href="{{ route('event-requests.index') }}" 
+       style="padding: 10px 40px; background-color: #f3f4f6; color: #374151; text-decoration: none; border-radius: 4px; font-weight: bold; cursor: pointer; border: 1px solid #d1d5db;">
+       CANCEL
+    </a>
+
+    <!-- Submit Button (ညာဘက်) -->
+    <button type="submit" 
+            style="padding: 10px 40px; background-color: #4B0082; color: white; border: none; border-radius: 4px; font-weight: bold; cursor: pointer;">
+            UPDATE
+    </button>
+    
+</div>
 
 @if ($errors->any())
 <div class="alert alert-danger">
