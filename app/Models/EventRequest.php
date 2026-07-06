@@ -1,7 +1,5 @@
 <?php
 
-// app/Models/EventRequest.php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -9,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class EventRequest extends Model
 {
     protected $fillable = [
+        'form_no',
+        'date_issued',
+        'signatures',
         'requester_name',
         'department',
         'contact',
@@ -33,6 +34,7 @@ class EventRequest extends Model
         'banner_qty',
 
         'total_cost',
+
         'logistics',
 
         'status',
@@ -40,6 +42,10 @@ class EventRequest extends Model
     ];
 
     protected $casts = [
+        'target_audience' => 'array',
         'logistics' => 'array',
+        'request_date' => 'date',
+        'signatures'      => 'array',
+        'proposed_date' => 'date',
     ];
 }

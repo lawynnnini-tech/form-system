@@ -20,47 +20,61 @@ class EventRequestController extends Controller
         return view('event_requests.create');
     }
 
-    public function store(Request $request)
+   public function store(Request $request)
 {
-    $request->validate([
-        'requester_name' => 'required',
-        'department' => 'required',
-        'contact' => 'required',
-        'request_date' => 'required',
-        'event_title' => 'required',
+    $validated = $request->validate([
+        'form_no' => 'required|unique:event_requests',
+        'date_issued' => 'nullable|date',
+
+        'requester_name' => 'required|max:255',
+        'department' => 'required|max:255',
+        'contact' => 'required|max:255',
+        'request_date' => 'required|date',
+
+        'event_title' => 'required|max:255',
+        'event_type' => 'required|max:255',
+
+        'proposed_date' => 'nullable|date',
+        'start_time' => 'nullable',
+        'end_time' => 'nullable',
+        'venue' => 'nullable|max:255',
+        'participants' => 'nullable|integer',
+
+        'target_audience' => 'nullable|array',
+        'purpose' => 'nullable',
+
+        'tables_qty' => 'nullable|integer',
+        'chairs_qty' => 'nullable|integer',
+        'projector_qty' => 'nullable|integer',
+        'microphone_qty' => 'nullable|integer',
+        'speaker_qty' => 'nullable|integer',
+        'banner_qty' => 'nullable|integer',
+
+        'total_cost' => 'nullable|numeric',
+
+        'logistics' => 'nullable|array',
+        'signatures' => 'nullable|array',
+        'signatures.*.name' => 'nullable|string|max:255',
+        'signatures.*.sig' => 'nullable|string|max:255',
+        'signatures.*.date' => 'nullable|date',
+
+        'remarks' => 'nullable',
     ]);
 
-    EventRequest::create([
-        'requester_name' => $request->requester_name,
-        'department' => $request->department,
-        'contact' => $request->contact,
-        'request_date' => $request->request_date,
+    EventRequest::create($validated);
+    $eventRequest = new EventRequest($validated);
+    
+    // အကယ်၍ signatures ပါလာလျှင် သီးသန့် assign လုပ်ပေးပါ
+    if ($request->has('signatures')) {
+        $eventRequest->signatures = $request->signatures;
+    }
 
-        'event_title' => $request->event_title,
-        'event_type' => $request->event_type,
-        'proposed_date' => $request->proposed_date,
-        'start_time' => $request->start_time,
-        'end_time' => $request->end_time,
-        'venue' => $request->venue,
-        'participants' => $request->participants,
-        'target_audience' => $request->target_audience,
+    $eventRequest->save();
 
-        'purpose' => $request->purpose,
-
-        'tables_qty' => $request->tables_qty,
-        'chairs_qty' => $request->chairs_qty,
-        'projector_qty' => $request->projector_qty,
-        'microphone_qty' => $request->microphone_qty,
-        'speaker_qty' => $request->speaker_qty,
-        'banner_qty' => $request->banner_qty,
-
-        'logistics' => $request->logistics ?? [],
-
-        'remarks' => $request->remarks,
-    ]);
-
-    return redirect()->route('event-requests.index')
-        ->with('success', 'Created Successfully');
+    
+    return redirect()
+        ->route('event-requests.index')
+        ->with('success', 'Event Request Created Successfully.');
 }
 
     public function show(EventRequest $eventRequest)
@@ -73,39 +87,56 @@ class EventRequestController extends Controller
         return view('event_requests.edit', compact('eventRequest'));
     }
 
-    public function update(Request $request, EventRequest $eventRequest)
+   public function update(Request $request, EventRequest $eventRequest)
 {
-    $eventRequest->update([
-        'requester_name' => $request->requester_name,
-        'department' => $request->department,
-        'contact' => $request->contact,
-        'request_date' => $request->request_date,
+    $validated = $request->validate([
+        'form_no' => 'required|unique:event_requests,form_no,' . $eventRequest->id,
 
-        'event_title' => $request->event_title,
-        'event_type' => $request->event_type,
-        'proposed_date' => $request->proposed_date,
-        'start_time' => $request->start_time,
-        'end_time' => $request->end_time,
-        'venue' => $request->venue,
-        'participants' => $request->participants,
-        'target_audience' => $request->target_audience,
+        'date_issued' => 'nullable|date',
 
-        'purpose' => $request->purpose,
+        'requester_name' => 'required|max:255',
+        'department' => 'required|max:255',
+        'contact' => 'required|max:255',
+        'request_date' => 'required|date',
 
-        'tables_qty' => $request->tables_qty,
-        'chairs_qty' => $request->chairs_qty,
-        'projector_qty' => $request->projector_qty,
-        'microphone_qty' => $request->microphone_qty,
-        'speaker_qty' => $request->speaker_qty,
-        'banner_qty' => $request->banner_qty,
+        'event_title' => 'required|max:255',
+        'event_type' => 'required|max:255',
 
-        'logistics' => $request->logistics ?? [],
+        'proposed_date' => 'nullable|date',
+        'start_time' => 'nullable',
+        'end_time' => 'nullable',
+        'venue' => 'nullable|max:255',
+        'participants' => 'nullable|integer',
 
-        'remarks' => $request->remarks,
+        'target_audience' => 'nullable|array',
+        'purpose' => 'nullable',
+
+        'tables_qty' => 'nullable|integer',
+        'chairs_qty' => 'nullable|integer',
+        'projector_qty' => 'nullable|integer',
+        'microphone_qty' => 'nullable|integer',
+        'speaker_qty' => 'nullable|integer',
+        'banner_qty' => 'nullable|integer',
+
+        'total_cost' => 'nullable|numeric',
+
+        'logistics' => 'nullable|array',
+        'signatures' => 'nullable|array',
+        'remarks' => 'nullable',
     ]);
 
-    return redirect()->route('event-requests.index')
-        ->with('success', 'Updated Successfully');
+    $eventRequest->update($validated);
+    
+    // အကယ်၍ signatures ပါလာလျှင် update လုပ်ပေးပါ
+    if ($request->has('signatures')) {
+        $eventRequest->update([
+            'signatures' => $request->signatures
+        ]);
+    }
+
+    return redirect()
+        ->route('event-requests.index')
+        ->with('success', 'Event Request Updated Successfully.');
 }
 
     public function destroy(EventRequest $eventRequest)

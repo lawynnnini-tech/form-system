@@ -12,41 +12,41 @@ return new class extends Migration {
         Schema::create('event_requests', function (Blueprint $table) {
             $table->id();
 
-            // Section A
-            $table->string('requester_name');
-            $table->string('department');
-            $table->string('contact');
-            $table->date('request_date');
+            $table->string('form_no')->unique();
+$table->date('date_issued')->nullable();
 
-            // Section B
-            $table->string('event_title');
-            $table->string('event_type');
-            $table->date('proposed_date')->nullable();
-            $table->time('start_time')->nullable();
-            $table->time('end_time')->nullable();
-            $table->string('venue')->nullable();
-            $table->integer('participants')->nullable();
-            $table->string('target_audience')->nullable();
+$table->string('requester_name');
+$table->string('department');
+$table->string('contact');
+$table->date('request_date');
 
-            // Section C
-            $table->text('purpose')->nullable();
+$table->string('event_title');
+$table->string('event_type');
+$table->date('proposed_date')->nullable();
+$table->time('start_time')->nullable();
+$table->time('end_time')->nullable();
+$table->string('venue')->nullable();
+$table->integer('participants')->nullable();
 
-            // Section D (Fixed Resources)
-            $table->integer('tables_qty')->nullable();
-            $table->integer('chairs_qty')->nullable();
-            $table->integer('projector_qty')->nullable();
-            $table->integer('microphone_qty')->nullable();
-            $table->integer('speaker_qty')->nullable();
-            $table->integer('banner_qty')->nullable();
+$table->json('target_audience')->nullable();
 
-            $table->decimal('total_cost', 10, 2)->nullable();
+$table->text('purpose')->nullable();
 
-            // Section E
-            $table->json('logistics')->nullable();
+$table->integer('tables_qty')->default(0);
+$table->integer('chairs_qty')->default(0);
+$table->integer('projector_qty')->default(0);
+$table->integer('microphone_qty')->default(0);
+$table->integer('speaker_qty')->default(0);
+$table->integer('banner_qty')->default(0);
 
-            // Section F
-            $table->string('status')->default('pending');
-            $table->text('remarks')->nullable();
+$table->decimal('total_cost',10,2)->default(0);
+
+$table->json('logistics')->nullable();
+
+$table->enum('status',['Pending','Approved','Rejected'])
+      ->default('Pending');
+
+$table->text('remarks')->nullable();
 
             $table->timestamps();
         });

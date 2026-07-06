@@ -11,7 +11,7 @@
 
     <style>
         body { font-family: 'Inter', sans-serif; }
-        .bg-sidebar { background-color: #1e134d; }
+        .bg-sidebar { background-color: #4B0082; }
         .text-sidebar-inactive { color: #9a96b8; }
         .bg-main { background-color: #F5F7FA; }
         [x-cloak] { display: none !important; }
@@ -22,7 +22,7 @@
 <body class="bg-main flex h-screen overflow-hidden">
 
     <!-- Sidebar -->
-    <aside class="w-64 shrink-0 bg-[#1e134d] text-white h-screen flex flex-col py-6">
+    <aside class="w-64 shrink-0 bg-[#4B0082] text-white h-screen flex flex-col py-6">
     <div class="px-6 mb-8 text-xl font-bold">Admin Panel</div>
     
     <nav class="flex-1 overflow-y-auto px-4 space-y-2">
@@ -32,7 +32,7 @@
         </a>
 
         <!-- Active Menu Example (Quotations) -->
-        <a href="/event-requests/create" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-[#4d44b5] text-white">
+        <a href="/event-requests" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-[#4d44b5] text-white">
             <span>📝</span> Event Requests
         </a>
 
