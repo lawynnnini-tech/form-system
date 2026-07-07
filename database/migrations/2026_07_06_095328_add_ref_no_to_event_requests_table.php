@@ -9,12 +9,12 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-   public function up()
-{
-    Schema::table('event_requests', function (Blueprint $table) {
-        $table->json('signatures')->nullable(); // json type ဖြင့်ထည့်ပါ
-    });
-}
+    public function up(): void
+    {
+       Schema::table('event_requests', function (Blueprint $table) {
+    $table->string('ref_no')->nullable()->after('status');
+});
+    }
 
     /**
      * Reverse the migrations.

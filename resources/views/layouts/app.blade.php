@@ -29,14 +29,17 @@
     
     <nav class="flex-1 overflow-y-auto px-4 space-y-2">
         <!-- Dashboard Menu -->
-        <a href="/dashboard" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#4d44b5] transition-all duration-200 text-gray-300 hover:text-white">
-            <span>📊</span> Dashboard
-        </a>
+        <a href="{{ route('dashboard') }}" 
+   class="flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 
+   {{ request()->routeIs('dashboard') ? 'bg-[#4d44b5] text-white' : 'text-gray-300 hover:text-white hover:bg-[#4d44b5]' }}">
+    <span>📊</span> Dashboard
+</a>
 
-        <!-- Active Menu Example (Quotations) -->
-        <a href="/event-requests" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-[#4d44b5] text-white">
-            <span>📝</span> Event Requests
-        </a>
+<a href="{{ route('event-requests.index') }}" 
+   class="flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 
+   {{ request()->routeIs('event-requests.*') ? 'bg-[#4d44b5] text-white' : 'text-gray-300 hover:text-white hover:bg-[#4d44b5]' }}">
+    <span>📝</span> Event Requests
+</a>
 
        
     </nav>
