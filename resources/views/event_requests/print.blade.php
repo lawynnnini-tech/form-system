@@ -5,10 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Print Event Request - {{ $eventRequest->form_no }}</title>
     <style>
-        @page {
-        size: A4;
-        margin: 15mm 15mm 15mm 15mm; /* အပေါ်၊ အောက်၊ ဘယ်၊ ညာ Margin ချန်ခြင်း */
-    }
         body { background: #f3f4f6; font-family: Arial, sans-serif; padding: 20px; margin: 0; }
         .form-container { width: 100%; max-width: 1024px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
         .header-wrapper { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
