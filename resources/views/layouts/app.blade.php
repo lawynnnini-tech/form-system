@@ -15,6 +15,8 @@
         .text-sidebar-inactive { color: #9a96b8; }
         .bg-main { background-color: #F5F7FA; }
         [x-cloak] { display: none !important; }
+
+
     </style>
     @stack('styles')
 </head>
