@@ -145,23 +145,24 @@ $validated['proposed_date'] = $request->proposed_date;
     {
         $eventRequest->delete();
 
-
-
-
-
     return redirect()->back()
         ->with('success', 'Deleted Successfully');
 }
 
 public function print($id)
 {
-    $eventRequest = EventRequest::findOrFail($id); // သင့် Model နာမည်အတိုင်း ပြောင်းပေးပါ
-    return view('event_requests.print', compact('eventRequest'));
-}
-
+    // DB ထဲက သက်ဆိုင်ရာ Event Request Data ကို ယူမယ်
+    $eventRequest = EventRequest::findOrFail($id); 
     
+    // ဥပမာ - JSON data တွေကို Array ပြန်ပြောင်းဖို့ လိုအပ်ရင်ပြောင်းပါ (ဥပမာ- department, logistics, purpose)
+    // တကယ်လို့ model မှာ cast လုပ်ထားပြီးသားဆိုရင် ဒါတွေ ထပ်လုပ်ပေးစရာမလိုပါဘူး။
+    $departments = is_string($eventRequest->department) ? json_decode($eventRequest->department, true) : $eventRequest->department;
+    $event_types = is_string($eventRequest->event_type) ? json_decode($eventRequest->event_type, true) : $eventRequest->event_type;
+    $target_audiences = is_string($eventRequest->target_audience) ? json_decode($eventRequest->target_audience, true) : $eventRequest->target_audience;
+    $purposes = is_string($eventRequest->purpose) ? json_decode($eventRequest->purpose, true) : $eventRequest->purpose;
+    $logistics = is_string($eventRequest->logistics) ? json_decode($eventRequest->logistics, true) : $eventRequest->logistics;
+    $signatures = is_string($eventRequest->signatures) ? json_decode($eventRequest->signatures, true) : $eventRequest->signatures;
 
-
-
-
+    return view('event_requests.print', compact('eventRequest', 'departments', 'event_types', 'target_audiences', 'purposes', 'logistics', 'signatures'));
+}
 }
