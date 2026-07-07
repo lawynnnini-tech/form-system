@@ -50,8 +50,7 @@
             <td class="border p-2">{{ $item->request_date }}</td>
            <td class="border p-2">
     <div class="flex items-center justify-center gap-2">
-
-        <!-- Edit Button -->
+  <!-- Edit Button -->
         <a href="{{ route('event-requests.edit', $item->id) }}"
            title="Edit Request"
            class="group w-9 h-9 flex items-center justify-center rounded-lg bg-green-500 hover:bg-yellow-600 text-white shadow-sm transition">

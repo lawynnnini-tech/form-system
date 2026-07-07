@@ -4,6 +4,15 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EventRequestController;
+use App\Http\Controllers\MaterialRequestController;
+
+
+Route::resource('material-requests', MaterialRequestController::class);
+
+
+
+Route::get('material-requests/{id}/print', [MaterialRequestController::class, 'print'])->name('material-requests.print');
+
 
 Route::get('/', function () {
     return redirect()->route('dashboard');
