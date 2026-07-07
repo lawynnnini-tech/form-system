@@ -145,7 +145,6 @@ $validated['proposed_date'] = $request->proposed_date;
     {
         $eventRequest->delete();
 
-<<<<<<< HEAD
     return redirect()->back()
         ->with('success', 'Deleted Successfully');
 }
@@ -155,10 +154,6 @@ public function print($id)
     $eventRequest = EventRequest::findOrFail($id); // သင့် Model နာမည်အတိုင်း ပြောင်းပေးပါ
     return view('event_requests.print', compact('eventRequest'));
 }
-=======
-        return back()->with('success', 'Deleted Successfully');
-    }
 
     
->>>>>>> 64c60858332269d606fc9f5c15100915d7cfd218
 }

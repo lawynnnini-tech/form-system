@@ -10,11 +10,9 @@ Route::resource('event-requests', EventRequestController::class);
 Route::get('/', function () {
     return view('dashboard');
 });
-<<<<<<< HEAD
 
 Route::get('event-requests/{id}/print', [EventRequestController::class, 'print'])
        ->name('event_requests.print');
-=======
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 
@@ -28,4 +26,4 @@ Route::get('/dashboard', function () {
         'recentRequests' => EventRequest::latest()->take(5)->get(),
     ]);
 })->name('dashboard');
->>>>>>> 64c60858332269d606fc9f5c15100915d7cfd218
+
