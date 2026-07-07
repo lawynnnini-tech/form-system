@@ -146,6 +146,9 @@ $validated['proposed_date'] = $request->proposed_date;
         $eventRequest->delete();
 
 
+
+
+
     return redirect()->back()
         ->with('success', 'Deleted Successfully');
 }
@@ -157,5 +160,8 @@ public function print($id)
 }
 
     
+
+
+
 
 }
