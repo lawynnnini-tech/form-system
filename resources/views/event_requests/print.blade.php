@@ -488,6 +488,13 @@
 
     </div>
 
+        <table class="print-layout-table">
+            <thead>
+                <tr>
+                    <td>
+                        <div style="display: flex; justify-content: flex-start; margin-bottom: 15px;">
+                            <img src="{{ asset('images/iam.png') }}" alt="I.A.M Logo" style="width: 90px; height: auto; object-fit: contain;">
+                        </div>
     <div class="form-container">
 
         <!-- <div style="display:flex;justify-content:flex-start;margin-bottom:15px;">
@@ -496,6 +503,10 @@
 
         </div>
 
+                        <div class="header-wrapper" style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 10px;">
+                            <div class="school-name" style="font-size: 18px; font-weight: bold; color: #4B0082; letter-spacing: 0.5px;">
+                                I.A.M International School
+                            </div>
         <div style="display:flex;justify-content:space-between;align-items:flex-end;">
 
             <div style="font-size:18px;font-weight:bold;color:#4B0082;">
@@ -504,6 +515,46 @@
 
             </div>
 
+                            <div class="form-meta" style="display: flex; gap: 20px; font-size: 14px; color: #333;">
+                                <div>
+                                    <span style="font-weight: bold; margin-right: 5px;">Form No:</span>
+                                    <span style="border-bottom: 1px solid #000; padding: 2px 10px; min-width: 60px; display: inline-block; text-align: center;">
+                                        {{ $eventRequest->form_no }}
+                                    </span>
+                                </div>
+                                <div>
+                                    <span style="font-weight: bold; margin-right: 5px;">Date:</span>
+                                    <span style="border-bottom: 1px solid #000; padding: 2px 10px; min-width: 80px; display: inline-block; text-align: center;">
+                                        {{ $eventRequest->date_issued ? \Carbon\Carbon::parse($eventRequest->date_issued)->format('m/d/Y') : '' }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <td>
+                        <div class="print-footer">
+                            <div>Confidential - For Internal Use Only -- I.A.M International School</div>
+                            <div class="print-footer-page">
+                                <span class="print-page-number"></span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tfoot>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="header-section" style="margin-bottom: 20px;">
+
+                            <div class="gold-line" style="border-top: 2px solid #e4ce0c; margin: 10px 0;"></div>
+                            <div class="main-title" style="font-size: 24px; font-weight: bold; color: #4B0082; text-align: center; margin-top: 15px;">EVENT / ACTIVITY REQUEST FORM</div>
+                            <div class="sub-title" style="font-style: italic; color: #555; text-align: center; margin-bottom: 15px;">Request to Organize or Conduct an Event / Activity</div>
+                            <div class="gold-line" style="border-top: 2px solid #e4ce0c; margin: 10px 0;"></div>
+                        </div>
             <div style="display:flex;gap:20px;">
 
                 <div>
@@ -546,6 +597,114 @@
             SECTION A — REQUESTER INFORMATION
         </div>
 
+                        <div class="section-title">SECTION A — REQUESTER INFORMATION</div><br>
+                        <table>
+                            <tr>
+                                <td class="label">Name of Requester / Organizer</td>
+                                <td>
+                                    <div class="value-text">{{ $eventRequest->requester_name }}</div>
+                                </td>
+                            </tr>
+                            <tr class="row-highlight">
+                                <td class="label">Department / Role</td>
+                                <td>
+                                    <div class="check-group">
+                                        @foreach(['Teacher', 'Marketing', 'Admin', 'Student'] as $dept)
+                                        <div class="check-item">
+                                            <input type="checkbox" disabled {{ is_array($departments) && in_array($dept, $departments) ? 'checked' : '' }}> {{ $dept }}
+                                        </div>
+                                        @endforeach
+                                        <div class="check-item">
+                                            <input type="checkbox" disabled {{ !empty($eventRequest->department_other) ? 'checked' : '' }}> Other:
+                                            <span style="border-bottom: 1px solid #000; padding: 0 10px;">{{ $eventRequest->department_other ?? '__________' }}</span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label">Contact Number / Email</td>
+                                <td>
+                                    <div class="value-text">{{ $eventRequest->contact }}</div>
+                                </td>
+                            </tr>
+                            <tr class="row-highlight">
+                                <td class="label">Date of Request</td>
+                                <td>
+                                    <div class="value-text">
+                                        {{ $eventRequest->request_date ? \Carbon\Carbon::parse($eventRequest->request_date)->format('m/d/Y') : '' }}
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <div class="section-title">SECTION B — EVENT DETAILS</div><br>
+                        <table>
+                            <tr>
+                                <td class="label">Event / Activity Title</td>
+                                <td>
+                                    <div class="value-text">{{ $eventRequest->event_title }}</div>
+                                </td>
+                            </tr>
+                            <tr class="row-highlight">
+                                <td class="label">Type of Event</td>
+                                <td>
+                                    <div class="check-group">
+                                        @foreach(['Academic', 'Sports', 'Cultural', 'Marketing', 'Meeting'] as $type)
+                                        <div class="check-item">
+                                            <input type="checkbox" disabled {{ is_array($event_types) && in_array($type, $event_types) ? 'checked' : '' }}> {{ $type }}
+                                        </div>
+                                        @endforeach
+                                        <div class="check-item">
+                                            <input type="checkbox" disabled {{ !empty($eventRequest->event_type_other) ? 'checked' : '' }}> Other:
+                                            <span style="border-bottom: 1px solid #000; padding: 0 10px;">{{ $eventRequest->event_type_other ?? '__________' }}</span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label">Proposed Date(s)</td>
+                                <td>
+                                    <div class="value-text">
+                                        {{ $eventRequest->proposed_date ? \Carbon\Carbon::parse($eventRequest->proposed_date)->format('m/d/Y') : '' }}
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="row-highlight">
+                                <td class="label">Start | End Time</td>
+                                <td>
+                                    Start: <span style="border-bottom: 1px solid #000; padding: 0 10px; margin-right: 20px;">{{ $eventRequest->start_time ? \Carbon\Carbon::parse($eventRequest->start_time)->format('h:i A') : '' }}</span>
+                                    End: <span style="border-bottom: 1px solid #000; padding: 0 10px;">{{ $eventRequest->end_time ? \Carbon\Carbon::parse($eventRequest->end_time)->format('h:i A') : '' }}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label">Venue / Location</td>
+                                <td>
+                                    <div class="value-text">{{ $eventRequest->venue }}</div>
+                                </td>
+                            </tr>
+                            <tr class="row-highlight">
+                                <td class="label">Expected Participants</td>
+                                <td>
+                                    <div class="value-text">{{ $eventRequest->participants }}</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label">Target Audience</td>
+                                <td>
+                                    <div class="check-group">
+                                        @foreach(['Students', 'Staff', 'Parents', 'Public'] as $aud)
+                                        <div class="check-item">
+                                            <input type="checkbox" disabled {{ is_array($target_audiences) && in_array($aud, $target_audiences) ? 'checked' : '' }}> {{ $aud }}
+                                        </div>
+                                        @endforeach
+                                        <div class="check-item">
+                                            <input type="checkbox" disabled {{ !empty($eventRequest->audience_other) ? 'checked' : '' }}> Other:
+                                            <span style="border-bottom: 1px solid #000; padding: 0 10px;">{{ $eventRequest->audience_other ?? '__________' }}</span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
         <table>
 
             <tr>
@@ -786,6 +945,52 @@
 
                 </td>
 
+                        <div class="section-title">SECTION C — PURPOSE / OBJECTIVES</div><br>
+                        <table class="purpose-table">
+                            @for ($i = 0; $i < 5; $i++)
+                                <tr class="{{ $i == 3 ? 'last-row' : '' }}">
+                                <td>{{ $purposes[$i] ?? '' }}</td>
+                </tr>
+                @endfor
+        </table>
+
+        <div class="section-title">SECTION D — RESOURCES NEEDED</div><br>
+        <table class="resources-table">
+            <thead>
+                <tr>
+                    <th>Item / Resource</th>
+                    <th>Quantity</th>
+                    <th>Source (In-house / External)</th>
+                    <th>Estimated Cost</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>AAA</td>
+                    <td>10</td>
+                    <td>Bb</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr class="total-row">
+                    <td colspan="3" style="color: #4B0082;">TOTAL ESTIMATED COST</td>
+                    <td style="text-align: center;">10</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <br><br><br><br><br>
             </tr>
 
             <tr>
@@ -1018,6 +1223,25 @@
 
         </table>
 
+        <div class="section-title">SECTION E — LOGISTICS & SUPPORT REQUIRED</div><br>
+        <div style="padding:15px; display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+            @foreach([
+            'sound' => 'Sound system / microphones',
+            'decor' => 'Decorations',
+            'tables' => 'Tables & chairs',
+            'refresh' => 'Refreshments / catering',
+            'projector' => 'Projector / screen',
+            'security' => 'Security / first aid',
+            'marketing' => 'Marketing materials (posters)'
+            ] as $key => $label)
+            <label>
+                <input type="checkbox" disabled {{ is_array($logistics) && in_array($key, $logistics) ? 'checked' : '' }}> {{ $label }}
+            </label>
+            @endforeach
+            <label>
+                <input type="checkbox" disabled> Other: <span style="border-bottom:1px solid #000; padding:0 10px;">{{ $eventRequest->logistics_other ?? '' }}</span>
+            </label>
+        </div>
 
         <!-- ========================================================= -->
         <!-- SECTION E -->
@@ -1142,6 +1366,10 @@
 
                     </div>
 
+        <div class="section-title">SECTION F — SIGNATURES & APPROVAL</div><br>
+        <div style="padding: 10px; font-style: italic; border-left: 4px solid #e4ce0c; background: #f9f9f9; margin-bottom: 15px;">
+            Note: This event/activity may only proceed after all required approvals are signed.
+        </div>
                 </td>
 
             </tr>
@@ -1156,6 +1384,37 @@
             SECTION F — SIGNATURES & APPROVAL
         </div>
 
+        @foreach([
+        '1. Requester / Organizer',
+        '2. Department Head / Supervisor',
+        '3. Principal / Manager',
+        '4. Finance Officer (if budget required)',
+        '5. Admin Office'
+        ] as $index => $role)
+        <div style="display: flex; border: 1px solid #dbd8d8; margin-bottom: 10px; page-break-inside: avoid;">
+            <div style="width: 30%; background: #f8f1fc; padding: 12px; font-weight: bold; color: #1e134d; display: flex; align-items: center; border-right: 1px solid #dbd8d8;">
+                {{ $role }}
+            </div>
+            <div style="width: 70%; padding: 10px; display: flex; flex-direction: column; gap: 8px; background: white; border-bottom: 2px solid #e4ce0c;">
+                <div style="display: flex; align-items: center; height: 25px;">
+                    <span style="width: 90px; font-size: 14px;">Name (Print):</span>
+                    <span style="border-bottom: 1px solid #000; flex: 1; font-size: 14px;">{{ $signatures[$index]['name'] ?? '' }}</span>
+                </div>
+                <div style="display: flex; align-items: center; height: 25px;">
+                    <span style="width: 90px; font-size: 14px;">Signature:</span>
+                    <span style="border-bottom: 1px solid #000; flex: 1; font-size: 14px;">{{ $signatures[$index]['signature'] ?? '' }}</span>
+                </div>
+                <div style="display: flex; align-items: center; height: 25px;">
+                    <span style="width: 90px; font-size: 14px;">Date:</span>
+                    <span style="border-bottom: 1px solid #000; flex: 1; font-size: 14px;">
+                        {{ !empty($signatures[$index]['date']) ? \Carbon\Carbon::parse($signatures[$index]['date'])->format('m/d/Y') : '' }}
+                    </span>
+                </div>
+            </div>
+        </div>
+        @endforeach
+
+        <br>
         <div style="
     padding:15px;
     margin-bottom:20px;
@@ -1253,6 +1512,28 @@
 
         @endforeach
 
+        <div style="background: #d8a51a; color: white; padding: 10px; font-weight: bold; margin-top: 10px;">
+            FOR OFFICE USE ONLY
+        </div>
+        <div style="border: 2px solid #4B0082; padding: 15px; background: #fff;">
+            <div style="margin-bottom: 15px; display: flex; gap: 20px;">
+                <label><input type="radio" disabled {{ $eventRequest->status == 'Approved' ? 'checked' : '' }}> Approved</label>
+                <label><input type="radio" disabled {{ $eventRequest->status == 'Rejected' ? 'checked' : '' }}> Rejected</label>
+            </div>
+            <div style="margin-bottom: 15px; display: flex; align-items: center;">
+                <span style="margin-right: 10px; font-weight: bold;">Reference No.:</span>
+                <span style="border-bottom: 1px solid #000; flex: 1;">{{ $eventRequest->ref_no }}</span>
+            </div>
+            <div style="display: flex; align-items: center;">
+                <span style="margin-right: 10px; font-weight: bold;">Remarks:</span>
+                <span style="border-bottom: 1px solid #000; flex: 1;">{{ $eventRequest->remarks }}</span>
+            </div>
+        </div>
+        </td>
+        </tr>
+        </tbody>
+        </table>
+    </div>
         <!-- ========================================================= -->
         <!-- OFFICE USE ONLY -->
         <!-- ========================================================= -->
