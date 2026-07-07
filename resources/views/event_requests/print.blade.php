@@ -112,7 +112,9 @@
                 <td class="label">Department / Role</td>
                 <td>
                     <div class="check-group">
-                        <span class="value-text">✔ {{ $eventRequest->department }}</span>
+                        <span class="value-text">
+                            ✔ {{ implode(', ', $eventRequest->department ?? []) }}
+                        </span>
                     </div>
                 </td>
             </tr>
@@ -134,7 +136,7 @@
             </tr>
             <tr class="row-highlight">
                 <td class="label">Type of Event</td>
-                <td class="value-text">✔ {{ $eventRequest->event_type }}</td>
+                <td class="value-text">✔ {{ implode(', ', $eventRequest->event_type ?? []) }}</td>
             </tr>
             <tr>
                 <td class="label">Proposed Date(s)</td>
@@ -171,7 +173,9 @@
         <div class="section-title">SECTION C — PURPOSE / OBJECTIVES</div>
         <div style="margin-top: 10px;">
             <div class="purpose-box">
-                {!! nl2br(e($eventRequest->purpose ?? 'N/A')) !!}
+                @foreach($eventRequest->purpose ?? [] as $purpose)
+    <div>• {{ $purpose }}</div>
+@endforeach
             </div>
         </div>
 
