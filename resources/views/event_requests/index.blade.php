@@ -72,14 +72,19 @@
                         </button>
                     </form>
 
+    <!--add print  -->
+    <a href="{{ route('event_requests.print', $item->id) }}"
+    target="_blank"
+    class="bg-blue-600 text-white px-2 py-1 rounded">
+         Print
+        </a>
+    <!-- end print -->
                 </td>
             </tr>
             @endforeach
         </tbody>
     </table>
-
 </div>
-
 </body>
 </html>
 @endsection
