@@ -48,38 +48,75 @@
             <td class="border p-2">{{ $item->event_title }}</td>
             <td class="border p-2">{{ $item->requester_name }}</td>
             <td class="border p-2">{{ $item->request_date }}</td>
-            <td class="border p-2">
+           <td class="border p-2">
+    <div class="flex items-center justify-center gap-2">
 
-                    <a href="{{ route('event-requests.show', $item->id) }}"
-                       class="bg-green-500 text-white px-2 py-1 rounded">
-                        View
-                    </a>
+        <!-- Edit Button -->
+        <a href="{{ route('event-requests.edit', $item->id) }}"
+           title="Edit Request"
+           class="group w-9 h-9 flex items-center justify-center rounded-lg bg-green-500 hover:bg-yellow-600 text-white shadow-sm transition">
+           
+            <svg xmlns="http://www.w3.org/2000/svg" 
+                 class="w-5 h-5" 
+                 fill="none" 
+                 viewBox="0 0 24 24" 
+                 stroke="currentColor">
+                <path stroke-linecap="round" 
+                      stroke-linejoin="round" 
+                      stroke-width="2" 
+                      d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.5-8.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 8.5-8.5z"/>
+            </svg>
 
-                    <a href="{{ route('event-requests.edit', $item->id) }}"
-                       class="bg-yellow-500 text-white px-2 py-1 rounded">
-                        Edit
-                    </a>
-
-                    <form action="{{ route('event-requests.destroy', $item->id) }}"
-                          method="POST"
-                          class="inline">
-                        @csrf
-                        @method('DELETE')
-
-                        <button class="bg-red-500 text-white px-2 py-1 rounded"
-                                onclick="return confirm('Delete?')">
-                            Delete
-                        </button>
-                    </form>
-
-    <!--add print  -->
-    <a href="{{ route('event_requests.print', $item->id) }}"
-    target="_blank"
-    class="bg-blue-600 text-white px-2 py-1 rounded">
-         Print
         </a>
-    <!-- end print -->
-                </td>
+
+
+        <!-- Delete Button -->
+        <form action="{{ route('event-requests.destroy', $item->id) }}"
+              method="POST">
+            @csrf
+            @method('DELETE')
+
+            <button type="submit"
+                    title="Delete Request"
+                    onclick="return confirm('Are you sure you want to delete this request?')"
+                    class="w-9 h-9 flex items-center justify-center rounded-lg bg-red-500 hover:bg-red-600 text-white shadow-sm transition">
+
+                <svg xmlns="http://www.w3.org/2000/svg" 
+                     class="w-5 h-5" 
+                     fill="none" 
+                     viewBox="0 0 24 24" 
+                     stroke="currentColor">
+                    <path stroke-linecap="round" 
+                          stroke-linejoin="round" 
+                          stroke-width="2" 
+                          d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6M9 7V4a1 1 0 011-1h4a1 1 0 011 1v3m-7 0h10"/>
+                </svg>
+
+            </button>
+        </form>
+
+
+        <!-- Print Button -->
+        <a href="{{ route('event-requests.print', $item->id) }}"
+           target="_blank"
+           title="Print Request"
+           class="w-9 h-9 flex items-center justify-center rounded-lg bg-blue-600 hover:bg-blue-700 text-white shadow-sm transition">
+
+            <svg xmlns="http://www.w3.org/2000/svg" 
+                 class="w-5 h-5" 
+                 fill="none" 
+                 viewBox="0 0 24 24" 
+                 stroke="currentColor">
+                <path stroke-linecap="round" 
+                      stroke-linejoin="round" 
+                      stroke-width="2" 
+                      d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2m-12 0h12v4H6v-4z"/>
+            </svg>
+
+        </a>
+
+    </div>
+</td>
             </tr>
             @endforeach
         </tbody>
