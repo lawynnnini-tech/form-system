@@ -14,6 +14,6 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
 
 Route::resource('event-requests', EventRequestController::class);
 
-Route::get('/event-requests/{eventRequest}/print',
+Route::get('/event_requests/{eventRequest}/print',
     [EventRequestController::class, 'print'])
-    ->name('event-requests.print');
+    ->name('event_requests.print');
