@@ -138,10 +138,8 @@
 <div class="max-w-6xl mx-auto bg-white p-8 rounded-xl shadow-lg border border-gray-100">
     <form method="POST" action="{{ route('material-requests.store') }}">
     @csrf
-    
-
         <div class="header-section">
-    
+
     <div class="header-wrapper">
     <div class="school-name">I.A.M INTERNATIONAL SCHOOL</div>
     <div class="form-meta" style="display: flex; gap: 20px; align-items: center;">
@@ -165,9 +163,7 @@
     
     
     <div class="gold-line"></div>
-</div>
-
-        
+</div>  
         <div class="section-title">SECTION A — REQUESTER INFORMATION</div><br>
         <table>
             <tr><td class="label">Full Name of Requester</td><td><input type="text" name="requester_name"></td></tr>
@@ -191,7 +187,8 @@
     <table class="resources-table">
     <thead>
         <tr>
-            <th style="width: 50px;">No.</th> <th>Item Description</th>
+            <th style="width: 50px;">No.</th> 
+            <th>Item Description</th>
             <th>Quantity</th>
             <th>Unit</th>
             <th>Remarks</th>
@@ -200,7 +197,8 @@
     <tbody>
         @for($i=0; $i<4; $i++)
         <tr>
-            <td style="text-align: center;">{{ $i + 1 }}</td> <td><input type="text" name="items[{{$i}}][desc]"></td>
+            <td style="text-align: center;">{{ $i + 1 }}</td> 
+            <td><input type="text" name="items[{{$i}}][desc]"></td>
             <td><input type="number" name="items[{{$i}}][qty]"></td>
             <td><input type="text" name="items[{{$i}}][unit]"></td>
             <td><input type="text" name="items[{{$i}}][remarks]"></td>
@@ -208,7 +206,6 @@
         @endfor
     </tbody>
 </table>
-
         
      <div class="section-title">SECTION C — PURPOSE / JUSTIFICATION</div><br>
 

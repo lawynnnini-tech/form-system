@@ -45,7 +45,6 @@
    class="flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 {{ request()->routeIs('material-requests.*') ? 'bg-[#4d44b5] text-white' : 'text-gray-300 hover:text-white hover:bg-[#4d44b5]' }}">
     <span>📄</span> Material Requests
 </a>
-  
     </nav>
 </aside>
 
