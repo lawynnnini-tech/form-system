@@ -15,6 +15,8 @@ class MaterialRequestController extends Controller
 {
     $materialRequest = MaterialRequest::findOrFail($id);
     return view('material_requests.edit', compact('materialRequest'));
+
+    
 }
 
 public function update(Request $request, $id)

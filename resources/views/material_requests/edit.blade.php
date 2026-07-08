@@ -178,13 +178,15 @@
         </tr>
     </thead>
     <tbody>
-        @for($i=0; $i<4; $i++)
-        <tr>
-            <td style="text-align: center;">{{ $i + 1 }}</td> <td><input type="text" name="items[{{$i}}][desc]"></td>
-            <td><input type="number" name="items[{{$i}}][qty]"></td>
-            <td><input type="text" name="items[{{$i}}][unit]"></td>
-            <td><input type="text" name="items[{{$i}}][remarks]"></td>
-        </tr>
+      @php $items = (array)$materialRequest->items; @endphp
+@for($i=0; $i<4; $i++)
+<tr>
+    <td>{{ $i + 1 }}</td> <td><input type="text" name="items[{{$i}}][desc]" value="{{ $items[$i]['desc'] ?? '' }}"></td>
+    <td><input type="number" name="items[{{$i}}][qty]" value="{{ $items[$i]['qty'] ?? '' }}"></td>
+    <td><input type="text" name="items[{{$i}}][unit]" value="{{ $items[$i]['unit'] ?? '' }}"></td>
+    <td><input type="text" name="items[{{$i}}][remarks]" value="{{ $items[$i]['remarks'] ?? '' }}"></td>
+</tr>
+
         @endfor
     </tbody>
 </table>
@@ -261,7 +263,7 @@
          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
     
     
-    <a href="{{ route('event-requests.index') }}" 
+    <a href="{{ route('material-requests.index') }}" 
        style="padding: 10px 40px; background-color: #e5e7eb; color: #374151; text-decoration: none; border-radius: 4px; font-weight: bold; cursor: pointer;">
        CANCEL
     </a>
