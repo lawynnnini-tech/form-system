@@ -4,7 +4,7 @@
 
 @section('content')
 <style>
-    /* အခြေခံအချက်အလက်များ */
+    
     body { background: #f3f4f6; font-family: Arial, sans-serif; padding: 20px; }
     .form-container { width: 100%; max-width: 1200px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
 
@@ -18,18 +18,18 @@
 
     /* Sections */
     .section-title { 
-        background: transparent;    /* နောက်ခံအရောင်မရှိစေရန် */
-        color: #4B0082;             /* စာသားအရောင်ကို Light Purple သို့ ပြောင်းခြင်း */
-        padding: 10px 0;            /* အပေါ်အောက် နေရာအနည်းငယ်ချန်ခြင်း */
+        background: transparent;    
+        color: #4B0082;            
+        padding: 10px 0;            
         font-weight: bold; 
         margin-top: 20px; 
         text-transform: uppercase;
-        border-bottom: 2px solid #9370DB; /* အောက်ခြေတွင် လိုင်းလေးတစ်ခုခံပေးခြင်းဖြင့် ပိုလှစေရန် */
+        border-bottom: 2px solid #9370DB; 
     }
 
     /* Table & Inputs */
   .label {
-        width: 350px; /* ဤနေရာတွင် width ကို တိုးမြှင့်ပါ (ဥပမာ- 350px) */
+        width: 350px; 
         padding: 10px;
         background-color: #f8f1fc; 
         color: #4B0082;            
@@ -38,7 +38,7 @@
         vertical-align: top;
     }
 
-    /* ကျန်ရှိသော CSS များမှာ မူလအတိုင်းဖြစ်သည် */
+    
     table {
         width: 100%;
         border-collapse: collapse;
@@ -57,29 +57,29 @@
     input[type="date"], 
     input[type="time"], 
     input[type="number"] {
-        border: none;                  /* အကွက်ဘောင်ကို ဖျောက်ခြင်း */
-        border-bottom: 1px solid #000; /* အောက်ခြေလိုင်းတစ်ခုတည်းကိုသာ ထားရှိခြင်း */
-        width: 100%;                   /* အကွက်အပြည့် ဖြန့်ထားခြင်း */
-        background: transparent;       /* နောက်ခံအရောင်မရှိစေရန် */
-        outline: none;                 /* ကလစ်နှိပ်သည့်အခါ ပေါ်လာသည့် ဘောင်ကို ပိတ်ခြင်း */
+        border: none;                  
+        border-bottom: 1px solid #000; 
+        width: 100%;                   
+        background: transparent;       
+        outline: none;                 
     }
 
-    /* Checkbox အောက်က Other input အတွက် အထူးပြင်ဆင်ချက် */
+    
     .check-group input[type="text"] {
-        width: 100px;                  /* Other အတွက် အကျယ်ကို ကန့်သတ်ခြင်း */
+        width: 100px;                 
         display: inline-block;
     }
     /* Section C Purpose Specifics */
 .purpose-table {
         width:100%;
         border-collapse: collapse;
-        border: 3px solid #b3a9dd; /* အပြင်ဘောင် */
+        border: 3px solid #b3a9dd; 
         background-color: #fff;
     }
 
     .purpose-table td {
                      
-        /* လိုင်းအရောင်ကို ပိုမိုဖျော့သော မီးခိုးရောင်ဖြင့် ပြောင်းလဲထားသည် */
+       
         border-bottom: 1px solid #d3d3d3; 
         height: 50px;
         padding: 0;
@@ -108,14 +108,14 @@
         border: 1px solid #dbd8d8;;
         height: 50px;
         padding: 5px;
-        background-color: #ffffff; /* ပုံမှန်အကွက်များ အဖြူရောင် */
+        background-color: #ffffff; 
     }
 
    .resources-table tbody tr:nth-child(even):not(.total-row) td {
         background-color: #f5f5c4; /* Light Yellow color */
     }
 
-    /* Total Row အတွက် အရောင်သတ်မှတ်ချက် */
+    
     .resources-table tbody tr.total-row td {
         background-color: #f8f1fc !important;
         font-weight: bold;
@@ -155,14 +155,14 @@
     </div>
 </div>
     
-    <!-- ရွှေရောင်လိုင်း -->
+   
     <div class="gold-line"></div>
     
-    <!-- ခေါင်းစဉ်များ -->
+    
     <div class="main-title">EVENT / ACTIVITY REQUEST FORM</div>
     <div class="sub-title">Request to Organize or Conduct an Event / Activity</div>
     
-    <!-- ရွှေရောင်လိုင်း -->
+    
     <div class="gold-line"></div>
 </div>
 
@@ -297,12 +297,12 @@
     '5. Admin Office'
 ] as $index => $role)
    <div style="display: flex; border: 1px solid #dbd8d8; margin-bottom: 10px;">
-    <!-- ဘယ်ဘက်ခြမ်း Role Area -->
+    
     <div style="width: 30%; background: #f8f1fc; padding: 12px; font-weight: bold; color: #1e134d; display: flex; align-items: center; border-right: 1px solid #dbd8d8;">
         {{ $role }}
     </div>
     
-    <!-- ညာဘက်ခြမ်း Inputs (အနေတော် Padding နှင့် Height) -->
+    
     <div style="width: 70%; padding: 10px; display: flex; flex-direction: column; gap: 8px; background: white; border-bottom: 2px solid #e4ce0c;">
         <div style="display: flex; align-items: center; height: 25px;">
             <span style="width: 90px; font-size: 14px;">Name (Print):</span>

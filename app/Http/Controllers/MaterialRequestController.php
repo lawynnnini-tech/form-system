@@ -15,6 +15,8 @@ class MaterialRequestController extends Controller
 {
     $materialRequest = MaterialRequest::findOrFail($id);
     return view('material_requests.edit', compact('materialRequest'));
+
+    
 }
 
 public function update(Request $request, $id)
@@ -35,9 +37,6 @@ public function update(Request $request, $id)
         MaterialRequest::create($request->all());
         return redirect()->route('material-requests.index')->with('success', 'သိမ်းဆည်းပြီးပါပြီ။');
     }
-
-
-    // app/Http/Controllers/MaterialRequestController.php
 
 public function destroy($id)
 {

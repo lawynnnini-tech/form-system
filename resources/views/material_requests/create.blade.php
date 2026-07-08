@@ -160,7 +160,7 @@
     <div class="gold-line"></div>
     
     
-    <div class="main-title">Material REQUEST FORM</div>
+    <div class="main-title">MATERIAL REQUEST FORM</div>
     <div class="sub-title">For Teachers . Marketing . Administrative Staff</div>
     
     
@@ -188,10 +188,10 @@
 
 
 <div class="section-title">SECTION B — MATERIAL DETAILS</div><br>
-       <table class="resources-table">
+    <table class="resources-table">
     <thead>
         <tr>
-            <th>Item Description</th>
+            <th style="width: 50px;">No.</th> <th>Item Description</th>
             <th>Quantity</th>
             <th>Unit</th>
             <th>Remarks</th>
@@ -200,7 +200,7 @@
     <tbody>
         @for($i=0; $i<4; $i++)
         <tr>
-            <td><input type="text" name="items[{{$i}}][desc]"></td>
+            <td style="text-align: center;">{{ $i + 1 }}</td> <td><input type="text" name="items[{{$i}}][desc]"></td>
             <td><input type="number" name="items[{{$i}}][qty]"></td>
             <td><input type="text" name="items[{{$i}}][unit]"></td>
             <td><input type="text" name="items[{{$i}}][remarks]"></td>
