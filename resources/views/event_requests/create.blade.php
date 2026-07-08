@@ -4,7 +4,7 @@
 
 @section('content')
 <style>
-    /* အခြေခံအချက်အလက်များ */
+    
     body { background: #f3f4f6; font-family: Arial, sans-serif; padding: 20px; }
     .form-container { width: 100%; max-width: 1200px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
 
