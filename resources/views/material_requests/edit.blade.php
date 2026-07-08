@@ -125,6 +125,18 @@
 
 
 </style>
+@if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+<div style="font-family: 'Arial', sans-serif; font-size: 30px; font-weight: 600; color: #2d1b69; border-left: 4px solid #e4ce0c; padding-left: 10px; margin-bottom: 15px;">
+    Edit Material Request Form
+</div>
 
 <div class="max-w-6xl mx-auto bg-white p-8 rounded-xl shadow-lg border border-gray-100">
     
@@ -147,7 +159,7 @@
                 </div>
             </div>
             <div class="gold-line"></div>
-            <div class="main-title">EDIT MATERIAL REQUEST FORM</div>
+            <div class="main-title">MATERIAL REQUEST FORM</div>
         </div>
 
         <div class="section-title">SECTION A — REQUESTER INFORMATION</div><br>
@@ -178,13 +190,15 @@
         </tr>
     </thead>
     <tbody>
-        @for($i=0; $i<4; $i++)
-        <tr>
-            <td style="text-align: center;">{{ $i + 1 }}</td> <td><input type="text" name="items[{{$i}}][desc]"></td>
-            <td><input type="number" name="items[{{$i}}][qty]"></td>
-            <td><input type="text" name="items[{{$i}}][unit]"></td>
-            <td><input type="text" name="items[{{$i}}][remarks]"></td>
-        </tr>
+      @php $items = (array)$materialRequest->items; @endphp
+@for($i=0; $i<4; $i++)
+<tr>
+    <td>{{ $i + 1 }}</td> <td><input type="text" name="items[{{$i}}][desc]" value="{{ $items[$i]['desc'] ?? '' }}"></td>
+    <td><input type="number" name="items[{{$i}}][qty]" value="{{ $items[$i]['qty'] ?? '' }}"></td>
+    <td><input type="text" name="items[{{$i}}][unit]" value="{{ $items[$i]['unit'] ?? '' }}"></td>
+    <td><input type="text" name="items[{{$i}}][remarks]" value="{{ $items[$i]['remarks'] ?? '' }}"></td>
+</tr>
+
         @endfor
     </tbody>
 </table>
@@ -261,7 +275,7 @@
          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
     
     
-    <a href="{{ route('event-requests.index') }}" 
+    <a href="{{ route('material-requests.index') }}" 
        style="padding: 10px 40px; background-color: #e5e7eb; color: #374151; text-decoration: none; border-radius: 4px; font-weight: bold; cursor: pointer;">
        CANCEL
     </a>
