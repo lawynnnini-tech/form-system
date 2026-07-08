@@ -374,7 +374,6 @@
        value="{{ old('remarks', $eventRequest->remarks) }}">
     </div>
 </div>
-
         <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
     
     <!-- Cancel Button (ဘယ်ဘက်) -->
