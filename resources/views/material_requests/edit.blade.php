@@ -168,20 +168,29 @@
         </table>
 
         <div class="section-title">SECTION B — MATERIAL DETAILS</div><br>
-        <table class="resources-table">
-            <thead><tr><th>Item Description</th><th>Quantity</th><th>Unit</th><th>Remarks</th></tr></thead>
-            <tbody>
-                @php $items = (array)$materialRequest->items; @endphp
-                @for($i=0; $i<4; $i++)
-                <tr>
-                    <td><input type="text" name="items[{{$i}}][desc]" value="{{ $items[$i]['desc'] ?? '' }}"></td>
-                    <td><input type="number" name="items[{{$i}}][qty]" value="{{ $items[$i]['qty'] ?? '' }}"></td>
-                    <td><input type="text" name="items[{{$i}}][unit]" value="{{ $items[$i]['unit'] ?? '' }}"></td>
-                    <td><input type="text" name="items[{{$i}}][remarks]" value="{{ $items[$i]['remarks'] ?? '' }}"></td>
-                </tr>
-                @endfor
-            </tbody>
-        </table>
+       <table class="resources-table">
+    <thead>
+        <tr>
+            <th style="width: 50px;">No.</th> <th>Item Description</th>
+            <th>Quantity</th>
+            <th>Unit</th>
+            <th>Remarks</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for($i=0; $i<4; $i++)
+        <tr>
+            <td style="text-align: center;">{{ $i + 1 }}</td> <td><input type="text" name="items[{{$i}}][desc]"></td>
+            <td><input type="number" name="items[{{$i}}][qty]"></td>
+            <td><input type="text" name="items[{{$i}}][unit]"></td>
+            <td><input type="text" name="items[{{$i}}][remarks]"></td>
+        </tr>
+        @endfor
+    </tbody>
+</table>
+
+
+
 
         <div class="section-title">SECTION C — PURPOSE / JUSTIFICATION</div><br>
         @php $purposes = (array)$materialRequest->purpose; @endphp
