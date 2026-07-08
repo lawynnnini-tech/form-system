@@ -555,9 +555,7 @@
             </div>
         </div>
         @endforeach
-
         <br>
-
         <div style="background: #d8a51a; color: white; padding: 10px; font-weight: bold; margin-top: 10px;">
             FOR OFFICE USE ONLY
         </div>

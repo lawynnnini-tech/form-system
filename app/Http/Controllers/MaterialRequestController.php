@@ -46,4 +46,13 @@ public function destroy($id)
 
     return redirect()->route('material-requests.index')->with('success', 'Deleted successfully!');
 }
+
+public function print($id)
+    {
+        
+        $item = MaterialRequest::findOrFail($id);
+
+        
+        return view('material_requests.print', compact('item'));
+    }
 }

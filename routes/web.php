@@ -27,3 +27,10 @@ Route::get('/event-requests/{id}/print', [EventRequestController::class, 'print'
         ->name('event-requests.print');
 
 
+
+
+// 🖨 Print ထုတ်ရန်အတွက် သီးသန့် Route (Resource ရဲ့ အပေါ်မှာ ထားပေးရပါမယ်)
+Route::get('material-requests/{id}/print', [MaterialRequestController::class, 'print'])->name('material-requests.print');
+
+// သင် လက်ရှိ သုံးထားတဲ့ Resource Route
+// Route::resource('material-requests', MaterialRequestController::class);
