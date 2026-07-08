@@ -10,7 +10,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-gray-100 p-6">
+<div class="bg-gray-100 p-6">
 
 <div class="max-w-6xl mx-auto bg-white p-4 rounded shadow">
 
@@ -121,6 +121,6 @@
         </tbody>
     </table>
 </div>
-</body>
+</div>
 </html>
 @endsection
