@@ -36,9 +36,6 @@ public function update(Request $request, $id)
         return redirect()->route('material-requests.index')->with('success', 'သိမ်းဆည်းပြီးပါပြီ။');
     }
 
-
-    // app/Http/Controllers/MaterialRequestController.php
-
 public function destroy($id)
 {
     $materialRequest = MaterialRequest::findOrFail($id);
