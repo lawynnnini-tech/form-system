@@ -125,6 +125,18 @@
 
 
 </style>
+@if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+<div style="font-family: 'Arial', sans-serif; font-size: 30px; font-weight: 600; color: #2d1b69; border-left: 4px solid #e4ce0c; padding-left: 10px; margin-bottom: 15px;">
+    Edit Material Request Form
+</div>
 
 <div class="max-w-6xl mx-auto bg-white p-8 rounded-xl shadow-lg border border-gray-100">
     
@@ -147,7 +159,7 @@
                 </div>
             </div>
             <div class="gold-line"></div>
-            <div class="main-title">EDIT MATERIAL REQUEST FORM</div>
+            <div class="main-title">MATERIAL REQUEST FORM</div>
         </div>
 
         <div class="section-title">SECTION A — REQUESTER INFORMATION</div><br>
